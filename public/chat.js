@@ -1,5 +1,5 @@
 // make connection
-var socket = io.connect('http://192.168.2.4:3000');
+var socket = io.connect('http://192.168.3.4:3000');
 
 // Query DOM
 var message = document.getElementById('message');
@@ -53,5 +53,6 @@ socket.on('monitor', function(data){
 	// output.innerHTML += '<p><strong>Tinggi</strong> : ' + data.distance + '</p>';
 	level(data.distance);
 	$('#ukuran-ketinggian').html(data.distance + "<small class='text-muted'> cm</small>");
+	console.log(data);
 });
 
