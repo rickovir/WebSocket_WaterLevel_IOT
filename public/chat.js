@@ -1,5 +1,5 @@
 // make connection
-var socket = io.connect('http://192.168.3.4:3000');
+var socket = io.connect('http://192.168.3.5:3000');
 
 // Query DOM
 var message = document.getElementById('message');
@@ -12,17 +12,26 @@ var output = document.getElementById('output');
 
 function level(val)
 {
-	if(val > 100)
+	if(val == "3")
 	{
-		$('#status-ketinggian').removeClass('btn-success');
+		$('#status-ketinggian').removeClass('btn-info');
+		$('#status-ketinggian').removeClass('btn-warning');
 		$('#status-ketinggian').addClass('btn-danger');
-		$('#status-ketinggian').text("Bahaya");
+		$('#status-ketinggian').text("Siaga 3");
 	}
-	else
+	else if(val == "2")
 	{
 		$('#status-ketinggian').removeClass('btn-danger');
-		$('#status-ketinggian').addClass('btn-success');
-		$('#status-ketinggian').text("Aman");
+		$('#status-ketinggian').removeClass('btn-info');
+		$('#status-ketinggian').addClass('btn-warning');
+		$('#status-ketinggian').text("Siaga 2");
+	}
+	if(val == "1")
+	{
+		$('#status-ketinggian').removeClass('btn-danger');
+		$('#status-ketinggian').removeClass('btn-warning');
+		$('#status-ketinggian').addClass('btn-info');
+		$('#status-ketinggian').text("Siaga 1");
 	}
 }
 
@@ -51,7 +60,7 @@ socket.on('connect', function(data) {
 
 socket.on('monitor', function(data){
 	// output.innerHTML += '<p><strong>Tinggi</strong> : ' + data.distance + '</p>';
-	level(data.distance);
+	level(data.status);
 	$('#ukuran-ketinggian').html(data.distance + "<small class='text-muted'> cm</small>");
 	console.log(data);
 });
