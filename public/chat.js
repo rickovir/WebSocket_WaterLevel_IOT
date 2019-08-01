@@ -1,51 +1,74 @@
 // make connection
-var socket = io.connect('http://34.87.1.138:3000');
+var socket = io.connect('http://34.87.1.138');
 
 // Query DOM
-var message = document.getElementById('message');
+var messageKatulampa = document.getElementById('messageKatulampa');
+var messageManggarai = document.getElementById('messageManggarai');
 var handle = document.getElementById('handle');
-var btn = document.getElementById('send');
+var btnkatulampa = document.getElementById('send-katulampa');
+var btnmanggarai = document.getElementById('send-manggarai');
 var output = document.getElementById('output');
 
-// emit events or
+// emit events
 
 
-function level(val)
+function levelKatulampa(val)
 {
-	if(val == "3")
+	if(val > 100)
 	{
-		$('#status-ketinggian').removeClass('btn-info');
-		$('#status-ketinggian').removeClass('btn-warning');
-		$('#status-ketinggian').addClass('btn-danger');
-		$('#status-ketinggian').text("Siaga 3");
+		$('#status-ketinggian-katulampa').removeClass('btn-success');
+		$('#status-ketinggian-katulampa').addClass('btn-danger');
+		$('#status-ketinggian-katulampa').text("Bahaya");
 	}
-	else if(val == "2")
+	else
 	{
-		$('#status-ketinggian').removeClass('btn-danger');
-		$('#status-ketinggian').removeClass('btn-info');
-		$('#status-ketinggian').addClass('btn-warning');
-		$('#status-ketinggian').text("Siaga 2");
+		$('#status-ketinggian-katulampa').removeClass('btn-danger');
+		$('#status-ketinggian-katulampa').addClass('btn-success');
+		$('#status-ketinggian-katulampa').text("Aman");
 	}
-	if(val == "1")
+}
+function levelManggarai(val)
+{
+	if(val > 100)
 	{
-		$('#status-ketinggian').removeClass('btn-danger');
-		$('#status-ketinggian').removeClass('btn-warning');
-		$('#status-ketinggian').addClass('btn-info');
-		$('#status-ketinggian').text("Siaga 1");
+		$('#status-ketinggian-manggarai').removeClass('btn-success');
+		$('#status-ketinggian-manggarai').addClass('btn-danger');
+		$('#status-ketinggian-manggarai').text("Bahaya");
+	}
+	else
+	{
+		$('#status-ketinggian-manggarai').removeClass('btn-danger');
+		$('#status-ketinggian-manggarai').addClass('btn-success');
+		$('#status-ketinggian-manggarai').text("Aman");
 	}
 }
 
-// btn.addEventListener("click", function(){
-// 	socket.emit('chat',{
-// 		message: message.value,
-// 		handle:handle.value
-// 	});
-// 	socket.emit('monitor',{
-// 		message: message.value,
-// 		handle:handle.value
-// 	});
+function testMonitor(data){
+	socket.emit('monitor',{distance:data});
+}
 
-// });
+btnkatulampa.addEventListener("click", function(){
+	// socket.emit('chat',{
+	// 	message: message.value,
+	// 	handle:handle.value
+	// });
+	socket.emit('monitor',{
+		distance: messageKatulampa.value,
+		id: "1"
+	});
+
+});
+btnmanggarai.addEventListener("click", function(){
+	// socket.emit('chat',{
+	// 	message: message.value,
+	// 	handle:handle.value
+	// });
+	socket.emit('monitor',{
+		distance: messageManggarai.value,
+		id :'2'
+	});
+
+});
 
 
 //listen for events
@@ -60,8 +83,14 @@ socket.on('connect', function(data) {
 
 socket.on('monitor', function(data){
 	// output.innerHTML += '<p><strong>Tinggi</strong> : ' + data.distance + '</p>';
-	level(data.status);
-	$('#ukuran-ketinggian').html(data.distance + "<small class='text-muted'> cm</small>");
 	console.log(data);
+	if(data.id == "1"){
+		levelKatulampa(data.distance);
+		$('#ukuran-ketinggian-katulampa').html(data.distance + "<small class='text-muted'> cm</small>");
+	}
+	else{
+		levelManggarai(data.distance);
+		$('#ukuran-ketinggian-manggarai').html(data.distance + "<small class='text-muted'> cm</small>");
+	}
 });
 
