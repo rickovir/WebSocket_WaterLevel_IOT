@@ -7,7 +7,7 @@ var handle = document.getElementById('handle');
 var btn = document.getElementById('send');
 var output = document.getElementById('output');
 
-// emit events
+// emit events or
 
 
 function level(val)
