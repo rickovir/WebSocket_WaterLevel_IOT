@@ -6,6 +6,16 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="/styles.css" rel="stylesheet" />
+    <link rel="manifest" href="/manifest.json" />
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+      var OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: "d48500e4-1fd7-43d8-b19f-b883ed96bb39",
+        });
+      });
+    </script>
 </head>
 <body>
 
@@ -13,13 +23,30 @@
         <div class="card-deck mb-12 text-center">
             <div class="card mb-12 shadow-sm">
               <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Ketinggian Muka Air</h4>
+                <h4 class="my-0 font-weight-normal">Ketinggian Muka Air Katulampa</h4>
               </div>
               <div class="card-body">
-                <h1 class="card-title pricing-card-title" id="ukuran-ketinggian"> 
+                <h1 class="card-title pricing-card-title" id="ukuran-ketinggian-katulampa"> 
                 </h1>
-                <p>Status</p>
-                <button type="button" id="status-ketinggian" class="btn btn-lg btn-block btn-success">Aman</button>
+                <p>Status Katulampa</p>
+                <button type="button" id="status-ketinggian-katulampa" class="btn btn-lg btn-block btn-success">Aman</button>
+                <input type="text" id="messageKatulampa">
+                <button type="button" id="send-katulampa">Send</button>
+              </div>
+            </div>
+          </div>
+        <div class="card-deck mb-12 text-center">
+            <div class="card mb-12 shadow-sm">
+              <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Ketinggian Muka Air Manggarai</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title" id="ukuran-ketinggian-manggarai"> 
+                </h1>
+                <p>Status Manggarai</p>
+                <button type="button" id="status-ketinggian-manggarai" class="btn btn-lg btn-block btn-success">Aman</button>
+                <input type="text" id="messageManggarai">
+                <button type="button" id="send-manggarai">Send</button>
               </div>
             </div>
           </div>
