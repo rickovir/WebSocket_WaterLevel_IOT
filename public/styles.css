@@ -50,14 +50,13 @@ input{
     padding: 10px 20px;
     box-sizing: border-box;
     background: #eee;
-    border: 1;
+    border: 0;
     display: block;
     width: 100%;
     background: #fff;
-    border: 1px solid #000;
+    border-bottom: 1px solid #eee;
     font-family: 'Cabin',sans-serif;
     font-size: 16px;
-    margin: 5px 0;
 }
 
 button{
